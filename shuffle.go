@@ -25,7 +25,9 @@ func (obj *ShuffleType) Init(min, max uint64, secretKey string) (err error) {
 	baseMin := obj.min
 	pos := uint64(0)
 	//rangeLeft := rangeMax
-	for i := uint64(0); i < 64; i++ {
+	//for i := uint64(0); i < 64; i++ {
+	for i := int64(63); i >= 0; i-- {
+		fmt.Println(i)
 		maxVal := uint64(1) << i
 		if rangeMax&maxVal == 0 {
 			continue
@@ -40,7 +42,6 @@ func (obj *ShuffleType) Init(min, max uint64, secretKey string) (err error) {
 		obj.mphsRange = append(obj.mphsRange, []uint64{base, base + incr})
 		pos += incr
 	}
-
 	//fmt.Printf("min=%d(%b) max=%d(%b),max-min=%b\n", min, min, max, max, max-min)
 	//for idx := 0; idx < len(obj.mphs); idx++ {
 	//	fmt.Printf("range=[%d,%d)\n", obj.mphsRange[idx][0]-min, obj.mphsRange[idx][1]-min)
